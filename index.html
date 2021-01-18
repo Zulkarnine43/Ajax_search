@@ -1,0 +1,36 @@
+ 
+<!DOCTYPE html>
+<html>
+<head>
+	<title>search bar</title>
+	<link href="bootstrap.min.css" type="style/css" rel="stylesheet">
+	<script src="bootstrap.min.js"></script>
+	<script src="jquery.min.js"></script>
+</head>
+<body>
+
+ <input class="form-control" type="text" name="search" id="search">
+ <div id="search_result"></div>
+ 
+</body>
+</html>
+
+ <script type="text/javascript">
+    $(document).ready(function(){
+        $('#search').keyup(function(){
+            var query = $(this).val();
+
+            if(query != ''){
+                $.ajax({
+                    url: "search.php",
+                    method: "POST",
+                    data:{query:query},
+                    success:function(data){
+                        $('#search_result').fadeIn();
+                        $('#search_result').html(data);
+                    }
+                });
+            }
+        });
+    });
+</script>
